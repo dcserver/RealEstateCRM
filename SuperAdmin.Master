@@ -1,0 +1,183 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SuperAdmin.master.cs" Inherits="RealEstateCRM.SuperAdmin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="description" content="Reat Estate Management application" />
+    <meta name="keywords" content="Real estate, Real statet magangement" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--Meta Responsive tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!--Custom style.css-->
+    <link rel="stylesheet" href="assets/css/quicksand.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>Welcome to Vaishnavi Developers</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <!--Page loader-->
+        <div class="loader-wrapper">
+            <div class="loader-circle">
+                <div class="loader-wave"></div>
+            </div>
+        </div>
+        <!--Page loader-->
+        <div class="container-fluid">
+            <!--Header-->
+            <div class="row header shadow-sm">
+
+                <!--Logo-->
+                <div class="col-sm-3 pl-0 text-center header-logo">
+                    <div class="bg-theme mr-3 pt-3 pb-2 mb-0">
+                        <h3 class="logo"><a href="Dashboard.aspx" class="text-secondary logo">Back Office Portal</a></h3>
+                    </div>
+                </div>
+                <!--Logo-->
+
+                <!--Header Menu-->
+                <div class="col-sm-9 header-menu pt-2 pb-0">
+                    <div class="row">
+
+                        <!--Menu Icons-->
+                        <div class="col-sm-4 col-8 pl-0">
+                            <!--Toggle sidebar-->
+                            <span class="menu-icon" onclick="toggle_sidebar()">
+                                <span id="sidebar-toggle-btn"></span>
+                            </span>
+                            <!--Toggle sidebar-->
+                        </div>
+                        <!--Menu Icons-->
+                    </div>
+                </div>
+                <!--Header Menu-->
+            </div>
+            <!--Header-->
+            <div class="row main-content">
+                <!--Sidebar left-->
+                <div class="col-sm-3 col-xs-6 sidebar pl-0">
+                    <div class="inner-sidebar mr-3">
+                        <!--Image Avatar-->
+                        <div class="avatar text-center">
+                            <img src="assets/img/client-img4.png" alt="" class="rounded-circle" />
+                            <p><strong>Reddy</strong></p>
+                            <span class="text-primary small"><strong>Admin</strong></span>
+                        </div>
+                        <!--Image Avatar-->
+                        <!--Sidebar Navigation Menu-->
+                        <div class="sidebar-menu-container">
+                            <ul class="sidebar-menu mt-4 mb-4">
+                                <li class="parent">
+                                    <a href="Dashboard.aspx"><i class="fa fa-dashboard mr-3"></i>
+                                        <span class="none">Dashboard <i class="pull-right align-bottom"></i></span>
+                                    </a>
+                                </li>
+                                <%--<li class="parent">
+                                    <a href="#" onclick="toggle_menu('employee'); return false" class=""><i class="fa fa-users mr-3"></i>
+                                        <span class="none">Employees <i class="fa fa-angle-down pull-right align-bottom"></i></span>
+                                    </a>
+                                    <ul class="children" id="employee">
+                                        <li class="child"><a href="EmployeesList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Employees</a></li>
+                                        <li class="child"><a href="EDocuments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Employee Docs</a></li>
+                                        <li class="child"><a href="DesignationsList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Desgination</a></li>
+                                        <li class="child"><a href="UsersList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Users</a></li>                                        
+                                    </ul>
+                                </li>--%>
+                                <li class="parent">
+                                    <a href="#" onclick="toggle_menu('projects'); return false" class=""><i class="fa fa-tasks mr-3"></i>
+                                        <span class="none">Projects <i class="fa fa-angle-down pull-right align-bottom"></i></span>
+                                    </a>
+                                    <ul class="children" id="projects">                                        
+                                        <li class="child"><a href="Projects.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Projects</a></li>
+                                        <li class="child"><a href="Plots.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Plots</a></li>
+                                        <li class="child"><a href="PassbookList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Passbook</a></li>
+                                        <li class="child"><a href="PDocuments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Documents</a></li>
+                                        <%--<li class="child"><a href="LandRecords.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Land Records</a></li>--%>
+                                        <li class="child"><a href="CommissionEntry.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Commission Entry</a></li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <a href="#" onclick="toggle_menu('Payments'); return false" class=""><i class="fa fa-tasks mr-3"></i>
+                                        <span class="none">Payments <i class="fa fa-angle-down pull-right align-bottom"></i></span>
+                                    </a>
+                                    <ul class="children" id="Payments">                                        
+                                        <li class="child"><a href="PlotPayments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Plot Payments</a></li>
+                                        <li class="child"><a href="CommissionPayments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Commission Payments</a></li>
+                                        <%--<li class="child"><a href="Payments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Office Expenses</a></li>
+                                        <li class="child"><a href="LandPayments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Land Payments</a></li>
+                                        <li class="child"><a href="DailySheet.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Daily Sheet</a></li>--%>
+                                    </ul>
+                                </li>
+                                 <%--<li class="parent">
+                                    <a href="Greetings.aspx"><i class="fa fa-sign-out mr-3"></i>
+                                        <span class="none">Send Sms<i class="pull-right align-bottom"></i></span>
+                                    </a>
+                                </li>
+                                <li class="parent">
+                                    <a href="Duplicates.aspx"><i class="fa fa-sign-out mr-3"></i>
+                                        <span class="none">Duplicates <i class="pull-right align-bottom"></i></span>
+                                    </a>
+                                </li>--%>
+                                <li class="parent">
+                                    <a href="Logout.aspx"><i class="fa fa-sign-out mr-3"></i>
+                                        <span class="none">Logout <i class="pull-right align-bottom"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Sidebar Naigation Menu-->
+                    </div>
+                </div>
+                <!--Sidebar left-->
+                <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Page JavaScript Files-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <!--Popper JS-->
+    <script src="assets/js/popper.min.js"></script>
+    <!--Bootstrap-->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+    <!--Sweet alert JS-->
+    <script src="assets/js/sweetalert.js"></script>
+    <!--Custom Js Script-->
+    <script src="assets/js/custom.js"></script>
+    <!--Custom Js Script-->
+    <script>
+        $('#departmentsList').DataTable();
+$('#passbookList').DataTable();
+        $('#registrationTable').DataTable();
+        $('#commissionTable').DataTable();
+        $('#employeesList').DataTable();
+        $('#projectsList').DataTable();
+        $('#plotsList').DataTable();
+        function ShowDepartmentModal() {
+            $("#DepartmentModal").modal("show");
+        }
+    </script>
+</body>
+</html>
