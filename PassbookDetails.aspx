@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-sm-4 col-12">
                         <label for="validationCustom01">PassBook No<span class="text-danger">*</span></label>
-                        <asp:TextBox ID="txtPassbookNo" runat="server" CssClass="form-control form-control-primary" placeholder="PassBookNo" Enabled="false" Text="0"></asp:TextBox>
+                        <asp:TextBox ID="txtPassbookNo" runat="server" CssClass="form-control form-control-primary" placeholder="PassBookNo" Text="0"></asp:TextBox>
                     </div>                    
                     <div class="col-sm-4 col-12">
                         <label for="validationCustom01">Plots : <asp:Label ID="lblSize" runat="server"></asp:Label></label>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4 col-12">
-                        <asp:Button ID="btnSubmit" runat="server" Text="Add Plot Entry" OnClick="btnSubmit_Click" CssClass="btn btn-primary" ValidationGroup="P" />
+                        <asp:Button ID="btnSubmit" runat="server" Text="Create Passbook" OnClick="btnSubmit_Click" CssClass="btn btn-primary" ValidationGroup="P" />
                         <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" CssClass="btn btn-primary" Visible="false" ValidationGroup="P" />
                         <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" CssClass="btn btn-danger" />
                     </div>

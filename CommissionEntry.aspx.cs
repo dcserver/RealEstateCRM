@@ -170,7 +170,7 @@ namespace RealEstateCRM
                                 }
                                 lblstatus.Text = "Entry Created Successfully";
                                 lblstatus.ForeColor = Color.Green;                                
-                                //BindProjects();
+                                BindProjects();
                             }
                         }
                     }
@@ -216,8 +216,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -233,6 +233,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnAGMECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -247,8 +248,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -264,6 +265,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnMOECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -278,8 +280,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -295,6 +297,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnMMECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -309,8 +312,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -326,6 +329,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnCMMECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -340,8 +344,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -357,6 +361,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnDGMECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -371,8 +376,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -388,6 +393,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnGMECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -402,8 +408,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -419,6 +425,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnCGMECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -433,8 +440,8 @@ namespace RealEstateCRM
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionEntry (PassbookNo,CreatedDate,UpdatedDate," +
-                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
-                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName)"))
+                    "PaymentDate,Percentage,Total,TDS,Eligibility,Advance,Pending,Paid,MarketerName,ProjectId) VALUES (@PassbookNo,@CreatedDate,@UpdatedDate," +
+                    "@PaymentDate,@Percentage,@Total,@TDS,@Eligibility,@Advance,@Pending,@Paid,@MarketerName,@ProjectId)"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {
@@ -450,6 +457,7 @@ namespace RealEstateCRM
                         cmd.Parameters.AddWithValue("@Advance", "0");
                         cmd.Parameters.AddWithValue("@Pending", hdnDDECommission.Value);
                         cmd.Parameters.AddWithValue("@Paid", "0");
+                        cmd.Parameters.AddWithValue("@ProjectId", ddlProjects.SelectedValue);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();

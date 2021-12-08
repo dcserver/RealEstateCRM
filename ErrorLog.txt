@@ -1,20 +1,11 @@
-﻿Time: 05/12/2021 11:15:01 AM
+﻿Time: 08-12-2021 08:49:17 PM
 -----------------------------------------------------------
-Message: Fatal error encountered during command execution.
-StackTrace:    at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
-   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
-   at RealEstateCRM.PDocuments.btnSubmit_Click(Object sender, EventArgs e)
-Source: MySql.Data
-TargetSite: MySql.Data.MySqlClient.MySqlDataReader ExecuteReader(System.Data.CommandBehavior)
------------------------------------------------------------
-
-Time: 05/12/2021 11:16:19 AM
------------------------------------------------------------
-Message: Fatal error encountered during command execution.
-StackTrace:    at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
-   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
-   at RealEstateCRM.PDocuments.btnSubmit_Click(Object sender, EventArgs e)
-Source: MySql.Data
-TargetSite: MySql.Data.MySqlClient.MySqlDataReader ExecuteReader(System.Data.CommandBehavior)
+Message: Input string was not in a correct format.
+StackTrace:    at System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.String.System.IConvertible.ToDouble(IFormatProvider provider)
+   at System.Convert.ToDouble(Object value)
+   at RealEstateCRM.PassbookDetails.ddlPlots_SelectedIndexChanged(Object sender, EventArgs e) in C:\Users\Tanisha\source\repos\dcserver\RealEstateCRM\PassbookDetails.aspx.cs:line 343
+Source: mscorlib
+TargetSite: Double ParseDouble(System.String, System.Globalization.NumberStyles, System.Globalization.NumberFormatInfo)
 -----------------------------------------------------------
 

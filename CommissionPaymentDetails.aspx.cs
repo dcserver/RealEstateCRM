@@ -335,7 +335,7 @@ namespace RealEstateCRM
                 string dbConnection = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
                 using (MySqlConnection con = new MySqlConnection(dbConnection))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("Select * from CommissionEntry where CommissionEntryId='" + ddlEmployees.SelectedValue + "'"))
+                    using (MySqlCommand cmd = new MySqlCommand("Select * from CommissionEntry where CommissionEntryId='" + ddlEmployees.SelectedValue + "' and ProjectId='" + ddlProjects.SelectedValue + "'"))
                     {
                         using (MySqlDataAdapter sda = new MySqlDataAdapter())
                         {

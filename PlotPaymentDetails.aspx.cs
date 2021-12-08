@@ -198,7 +198,7 @@ namespace RealEstateCRM
                     "</thead><tbody>";
                 using (MySqlConnection con = new MySqlConnection(dbConnection))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("select * from PlotPayments pass where PassbookNo='" + ddlPassbook.SelectedValue + "' and ProjectId='"+ddlPassbook.SelectedItem.Text+"'"))
+                    using (MySqlCommand cmd = new MySqlCommand("select * from PlotPayments pass where PassbookNo='" + ddlPassbook.SelectedValue + "' and ProjectId='"+ddlProjects.SelectedValue+"'"))
                     {
                         using (MySqlDataAdapter sda = new MySqlDataAdapter())
                         {

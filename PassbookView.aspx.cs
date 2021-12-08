@@ -44,7 +44,7 @@ namespace RealEstateCRM
             string dbConnection = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
             using (MySqlConnection con = new MySqlConnection(dbConnection))
             {
-                using (MySqlCommand cmd = new MySqlCommand("Select ps.*,pt.Status as PlotStatus,pt.PlotNo,pt.Facing,pt.Size as PlotSize,pr.ProjectName FROM Passbook ps, Plots pt,Projects pr where pr.ProjectId=pt.ProjectId and pt.PlotId=ps.PlotId and ps.PassbookId='" + PassBookId + "'"))
+                using (MySqlCommand cmd = new MySqlCommand("Select ps.*,pt.Status as PlotStatus,pt.PlotNo,pt.Facing,pt.Size as PlotSize,pr.ProjectName FROM Passbook ps, Plots pt,Projects pr where pr.ProjectId=ps.ProjectId and pt.PlotId=ps.PlotId and ps.PassbookId='" + PassBookId + "'"))
                 {
                     using (MySqlDataAdapter sda = new MySqlDataAdapter())
                     {

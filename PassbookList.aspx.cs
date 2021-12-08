@@ -72,6 +72,7 @@ namespace RealEstateCRM
                     "<thead>" +
                         "<tr>" +
                             "<th>PassbookNo</th>" +
+                            "<th>PlotNo</th>" +
                             "<th>Project</th>" +
                             "<th>DateOfJoin</th>" +
                             "<th>LastDate</th>" +
@@ -83,7 +84,7 @@ namespace RealEstateCRM
                     "</thead><tbody>";
                 using (MySqlConnection con = new MySqlConnection(dbConnection))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("Select ps.*,pt.Status as PlotStatus,pr.ProjectName as ProjectName FROM Passbook ps, Plots pt,Projects pr where pt.PlotId=ps.PlotId and pt.ProjectId=pr.ProjectId  order by DateOfJoin desc"))
+                    using (MySqlCommand cmd = new MySqlCommand("Select ps.*,pt.Status as PlotStatus,pr.ProjectName as ProjectName,pt.PlotNo FROM Passbook ps, Plots pt,Projects pr where pt.PlotId=ps.PlotId and ps.ProjectId=pr.ProjectId  order by DateOfJoin desc"))
                     {
                         using (MySqlDataAdapter sda = new MySqlDataAdapter())
                         {
@@ -97,6 +98,7 @@ namespace RealEstateCRM
                                     int index = i + 1;
                                     htmldata += "<tr> " +
                                                     "<td>" + dt.Rows[i]["PassbookNo"] + "</td>" +
+                                                    "<td>" + dt.Rows[i]["PlotNo"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["ProjectName"] + "</td>" +
                                                     "<td>" + Convert.ToDateTime(dt.Rows[i]["DateOfJoin"]).ToString("dd/MM/yyyy") + "</td>" +
                                                     "<td>" + Convert.ToDateTime(dt.Rows[i]["PaymentLastDate"]).ToString("dd/MM/yyyy") + "</td>" +

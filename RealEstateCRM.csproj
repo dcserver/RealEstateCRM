@@ -2085,6 +2085,7 @@
     <Content Include="PlotPayments.aspx" />
     <Content Include="Plots.aspx" />
     <Content Include="Projects.aspx" />
+    <Content Include="UploadDoc.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2202,6 +2203,13 @@
     </Compile>
     <Compile Include="SuperAdmin.Master.designer.cs">
       <DependentUpon>SuperAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UploadDoc.aspx.cs">
+      <DependentUpon>UploadDoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadDoc.aspx.designer.cs">
+      <DependentUpon>UploadDoc.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
