@@ -384,5 +384,75 @@ namespace RealEstateCRM
             }
             return PassbookId;
         }
-    }
+
+        protected void btnCPayment_Click(object sender, EventArgs e)
+        {
+            DataTable dtPlots = ImportCommissionsPayments();
+            if (dtPlots.Columns.Count > 0)
+            {
+                InsertCommissionPayments(dtPlots);
+            }
+        }
+        private DataTable ImportCommissionsPayments()
+        {
+            DataTable dt = new DataTable();
+            using (StreamReader sr = new StreamReader(@"D:\GoldCommissions.tsv"))
+            {
+                string[] headers = sr.ReadLine().Split('\t');
+                foreach (string header in headers)
+                {
+                    dt.Columns.Add(header);
+                }
+                while (!sr.EndOfStream)
+                {
+                    string[] rows = sr.ReadLine().Split('\t');
+                    DataRow dr = dt.NewRow();
+                    for (int i = 0; i < headers.Length; i++)
+                    {
+                        dr[i] = rows[i];
+                    }
+                    dt.Rows.Add(dr);
+                }
+
+            }
+            return dt;
+        }
+
+        private void InsertCommissionPayments(DataTable dt)
+        {
+            string dbConnection = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string PassbookId = GetPassbookId(dt.Rows[i]["PB NO"].ToString());
+                using (MySqlConnection con = new MySqlConnection(dbConnection))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("INSERT INTO CommissionPayments (VoucherNo,PassbookNo,ProjectId,Amount,PaymentDate," +
+                        "PaymentMethod,PaymentDetails," +
+                        "UserId,CreatedDate,UpdatedDate,MarketerName) VALUES (@VoucherNo,@PassbookNo,@ProjectId,@Amount,@PaymentDate," +
+                        "@PaymentMethod,@PaymentDetails," +
+                        "@UserId,@CreatedDate,@UpdatedDate,@MarketerName)"))
+                    {
+                        using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                        {
+                            cmd.Parameters.AddWithValue("@VoucherNo", dt.Rows[i]["V.NO"]);
+                            cmd.Parameters.AddWithValue("@PassbookNo", PassbookId);
+                            cmd.Parameters.AddWithValue("@ProjectId", "3");
+                            cmd.Parameters.AddWithValue("@Amount", dt.Rows[i]["ISSUED"]);
+                            cmd.Parameters.AddWithValue("@PaymentDate", dt.Rows[i]["DATE"]);
+                            cmd.Parameters.AddWithValue("@PaymentMethod", dt.Rows[i]["METHOD"]);
+                            cmd.Parameters.AddWithValue("@PaymentDetails", dt.Rows[i]["METHOD"]);
+                            cmd.Parameters.AddWithValue("@UserId", "1");
+                            cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@UpdatedDate", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@MarketerName", dt.Rows[i]["NAME"]);
+                            cmd.Connection = con;
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                    }
+                }
+            }
+        }
+    }    
 }

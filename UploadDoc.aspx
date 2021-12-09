@@ -15,10 +15,13 @@
             <asp:Button ID="btnPassbook" runat="server" Text="Upload Passbook" OnClick="btnPassbook_Click" Visible="false" />
         </div>
         <div>
-            <asp:Button ID="btnReceipts" runat="server" Text="Upload Receipts" OnClick="btnReceipts_Click" Visible="true" />
+            <asp:Button ID="btnReceipts" runat="server" Text="Upload Receipts" OnClick="btnReceipts_Click" Visible="false" />
         </div>
         <div>
-            <asp:Button ID="btnCommissions" runat="server" Text="Upload Commissions" OnClick="btnCommissions_Click" Visible="true" />
+            <asp:Button ID="btnCommissions" runat="server" Text="Upload Commissions" OnClick="btnCommissions_Click" Visible="false" />
+        </div>
+        <div>
+            <asp:Button ID="btnCPayment" runat="server" Text="Upload Commission Payment" OnClick="btnCPayment_Click" Visible="true" />
         </div>
     </form>
 </body>
