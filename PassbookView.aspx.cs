@@ -91,12 +91,12 @@ namespace RealEstateCRM
                 htmldata += "<table class='table table-bordered table-striped mt-3' id='commissionTabl'>" +
                     "<thead>" +
                         "<tr>" +
-                               "<th>VoucherNo</th>" + "<th>Marketer</th>" + "<th>Payment Date</th>" + "<th>Amount</th>" + "<th>PaymentMethod</th>" +
+                               "<th>VoucherNo</th>" + "<th>Marketer</th>" + "<th>Payment Date</th>" + "<th>Amount</th>" + "<th>Details</th><th>Method</th>" +
                         "</tr>" +
                     "</thead><tbody>";
                 using (MySqlConnection con = new MySqlConnection(dbConnection))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("select VoucherNo,MarketerName,Amount,PaymentDate,PaymentMethod from CommissionPayments where PassbookNo='" + PassbookNo + "' and ProjectId='" + ProjectId + "'"))
+                    using (MySqlCommand cmd = new MySqlCommand("select VoucherNo,MarketerName,Amount,PaymentDate,PaymentMethod,PaymentDetails from CommissionPayments where PassbookNo='" + PassbookNo + "' and ProjectId='" + ProjectId + "'"))
                     {
                         using (MySqlDataAdapter sda = new MySqlDataAdapter())
                         {
@@ -114,6 +114,7 @@ namespace RealEstateCRM
                                                     "<td>" + dt.Rows[i]["MarketerName"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentDate"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["Amount"] + "</td>" +
+                                                    "<td>" + dt.Rows[i]["PaymentDetails"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentMethod"] + "</td>" +
                                     "</tr>";
                                 }

@@ -268,8 +268,8 @@ namespace RealEstateCRM
                     {
                         using (MySqlDataAdapter sda = new MySqlDataAdapter())
                         {
-                            cmd.Parameters.AddWithValue("@ReceiptNo", PassbookId);
-                            cmd.Parameters.AddWithValue("@PassbookNo", dtPlots.Rows[i]["PassbookNo"]);
+                            cmd.Parameters.AddWithValue("@ReceiptNo", dtPlots.Rows[i]["RecieptNo"]);
+                            cmd.Parameters.AddWithValue("@PassbookNo", PassbookId);
                             cmd.Parameters.AddWithValue("@Amount", dtPlots.Rows[i]["AmountReceived"]);
                             cmd.Parameters.AddWithValue("@PaymentDate", dtPlots.Rows[i]["Date"]);
                             cmd.Parameters.AddWithValue("@PaymentMethod", dtPlots.Rows[i]["Method"]);

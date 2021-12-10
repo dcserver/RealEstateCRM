@@ -201,7 +201,7 @@ namespace RealEstateCRM
                                                     "<td>" + dt.Rows[i]["MarketerName"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PassbookNo"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["Amount"] + "</td>" +
-                                                    "<td>" + Convert.ToDateTime(dt.Rows[i]["PaymentDate"]).ToString("dd/MM/yyyy") + "</td>" +
+                                                    "<td>" + dt.Rows[i]["PaymentDate"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentMethod"] + "</td>" +
                                     "</tr>";
                                 }

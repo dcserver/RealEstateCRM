@@ -49,7 +49,7 @@ namespace RealEstateCRM
                     "</thead><tbody>";
                 using (MySqlConnection con = new MySqlConnection(dbConnection))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("select cp.VoucherNo,cp.MarketerName,cp.PassbookNo,cp.Amount,cp.PaymentDate,cp.PaymentMethod,pr.ProjectName from CommissionPayments cp, Projects pr where pr.ProjectId=cp.ProjectId"))
+                    using (MySqlCommand cmd = new MySqlCommand("select cp.VoucherNo,cp.MarketerName,ps.PassbookNo,cp.Amount,cp.PaymentDate,cp.PaymentMethod,pr.ProjectName from CommissionPayments cp, Projects pr, Passbook ps where pr.ProjectId=cp.ProjectId and ps.PassbookId=cp.PassbookNo"))
                     {
                         using (MySqlDataAdapter sda = new MySqlDataAdapter())
                         {
@@ -67,7 +67,7 @@ namespace RealEstateCRM
                                         "<td>" + dt.Rows[i]["VoucherNo"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["MarketerName"] + "</td>" +                                                    
                                                     "<td>" + dt.Rows[i]["Amount"] + "</td>" +
-                                                    "<td>" + Convert.ToDateTime(dt.Rows[i]["PaymentDate"]).ToString("dd/MM/yyyy") + "</td>" +
+                                                    "<td>" + dt.Rows[i]["PaymentDate"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentMethod"] + "</td>" +                                                    
                                     "</tr>";
                                 }

@@ -21,7 +21,7 @@
             <asp:Button ID="btnCommissions" runat="server" Text="Upload Commissions" OnClick="btnCommissions_Click" Visible="false" />
         </div>
         <div>
-            <asp:Button ID="btnCPayment" runat="server" Text="Upload Commission Payment" OnClick="btnCPayment_Click" Visible="true" />
+            <asp:Button ID="btnCPayment" runat="server" Text="Upload Commission Payment" OnClick="btnCPayment_Click" Visible="false" />
         </div>
     </form>
 </body>

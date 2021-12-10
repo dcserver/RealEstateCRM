@@ -43,12 +43,14 @@ namespace RealEstateCRM
                 htmldata += "<table class='table table-bordered table-striped mt-3' id='commissionTable'>" +
                     "<thead>" +
                         "<tr>" +
-                           "<th>ReceiptNo</th>" + "<th>Date</th>" + "<th>Amount</th>" + "<th>PaymentMethod</th><th>Transaction</th>" +
+                        "<th>ProjectName</th>" +
+                        "<th>PassbookNo</th>" +
+                           "<th>ReceiptNo</th>" + "<th>Amount</th>" + "<th>Date</th>" + "<th>PaymentMethod</th>" +
                         "</tr>" +
                     "</thead><tbody>";
                 using (MySqlConnection con = new MySqlConnection(dbConnection))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("select * from PlotPayments"))
+                    using (MySqlCommand cmd = new MySqlCommand("select cp.ReceiptNo,ps.PassbookNo,cp.Amount,cp.PaymentDate,cp.PaymentMethod,pr.ProjectName from PlotPayments cp, Projects pr, Passbook ps where pr.ProjectId=cp.ProjectId and ps.PassbookId=cp.PassbookNo"))
                     {
                         using (MySqlDataAdapter sda = new MySqlDataAdapter())
                         {
@@ -61,11 +63,12 @@ namespace RealEstateCRM
                                 {
                                     int index = i + 1;
                                     htmldata += "<tr>" +
-                                                    "<td>" + dt.Rows[i]["ReceiptNo"] + "</td>" +
-                                                    "<td>" + Convert.ToDateTime(dt.Rows[i]["PaymentDate"]).ToString("dd/MM/yyyy") + "</td>" +
+                                        "<td>" + dt.Rows[i]["ProjectName"] + "</td>" +
+                                        "<td>" + dt.Rows[i]["PassbookNo"] + "</td>" +
+                                        "<td>" + dt.Rows[i]["ReceiptNo"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["Amount"] + "</td>" +
+                                                    "<td>" + dt.Rows[i]["PaymentDate"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentMethod"] + "</td>" +
-                                                    "<td>" + dt.Rows[i]["PaymentDetails"] + "</td>" +
                                     "</tr>";
                                 }
                             }
