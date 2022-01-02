@@ -11,7 +11,7 @@ namespace RealEstateCRM
 {
 
 
-    public partial class Dashboard
+    public partial class CancellationsList
     {
 
         /// <summary>
@@ -22,14 +22,5 @@ namespace RealEstateCRM
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl htmlDiv;
-
-        /// <summary>
-        /// htmlPlotDiv control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl htmlPlotDiv;
     }
 }

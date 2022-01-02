@@ -72,7 +72,7 @@ namespace RealEstateCRM
                                 lblCustomerName.Text = dt.Rows[0]["Name"].ToString();
                                 BindCommissions(dt.Rows[0]["PassbookId"].ToString(), dt.Rows[0]["ProjectId"].ToString());
                                 BindPayments(dt.Rows[0]["PassbookId"].ToString(), dt.Rows[0]["ProjectId"].ToString());
-                                //BindPassbookDocuents(dt.Rows[0]["Passbookno"].ToString(), dt.Rows[0]["Passbookno"].ToString());
+                                BindPassbookDocuents(dt.Rows[0]["PassbookId"].ToString(), dt.Rows[0]["PassbookId"].ToString());
                                 BindCommissionsPayments(dt.Rows[0]["PassbookId"].ToString(), dt.Rows[0]["ProjectId"].ToString());
                             }
                         }
@@ -161,7 +161,7 @@ namespace RealEstateCRM
                                     totalEligibility = totalEligibility + Convert.ToDouble(dt.Rows[i]["Eligibility"]);
                                     htmldata += "<tr>" +
                                                     "<td>" + dt.Rows[i]["MarketerName"] + "</td>" +
-                                                    "<td>" + Convert.ToDateTime(dt.Rows[i]["PaymentDate"]).ToString("dd/MM/yyyy") + "</td>" +
+                                                    "<td>" + dt.Rows[i]["PaymentDate"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["Percentage"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["Total"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["TDS"] + "</td>" +
@@ -210,7 +210,7 @@ namespace RealEstateCRM
                                 for (int i = 0; i < dt.Rows.Count; i++)
                                 {
                                     htmldata += "<tr>" +
-                                        "<td>" + Convert.ToDateTime(dt.Rows[i]["PaymentDate"]).ToString("dd/MM/yyyy") + "</td>" +
+                                        "<td>" + dt.Rows[i]["PaymentDate"] + "</td>" +
                                         "<td>" + dt.Rows[i]["ReceiptNo"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["Amount"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentMethod"] + "</td>" +

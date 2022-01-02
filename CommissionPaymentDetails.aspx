@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-sm-4 col-12">
                         <label for="validationCustom01">Amount<span class="text-danger">*</span></label>
-                        <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control form-control-primary" placeholder="Amount"></asp:TextBox>
+                        <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control form-control-primary" placeholder="Amount" TextMode="Number"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvAmount" runat="server" ErrorMessage="Please Enter Amount" ControlToValidate="txtAmount" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>                    
                 </div>                

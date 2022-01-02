@@ -2,6 +2,10 @@
 using System;
 using System.Configuration;
 using System.Data;
+using iTextSharp.text;
+using iTextSharp.text.html;
+using iTextSharp.text.pdf;
+using System.Web;
 
 namespace RealEstateCRM
 {
@@ -212,7 +216,7 @@ namespace RealEstateCRM
                                     int index = i + 1;
                                     htmldata += "<tr>" +
                                                     "<td>" + dt.Rows[i]["ReceiptNo"] + "</td>" +
-                                                    "<td>" + Convert.ToDateTime(dt.Rows[i]["PaymentDate"]).ToString("dd/MM/yyyy") + "</td>" +
+                                                    "<td>" + dt.Rows[i]["PaymentDate"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["Amount"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentMethod"] + "</td>" +
                                                     "<td>" + dt.Rows[i]["PaymentDetails"] + "</td>" +
@@ -238,10 +242,12 @@ namespace RealEstateCRM
             txtMaintainance.Text = "0";
             txtPendingAmount.Text = "0";
             txtPaymentReference.Text = "";
-            ddlPassbook.ClearSelection();
+            //ddlPassbook.ClearSelection();
             ddlPaymentMethod.SelectedValue = "GooglePay";
             txtTotalPlotamount.Text = "0";
+            //ddlProjects.ClearSelection();
             GenerateReceiptNo();
+            CreateReceiptPDF(hdnpdfReceipt.Value, hdnpdfPaymentDate.Value, hdnpdfAmount.Value, hdnpdfPassbookId.Value, hdnpdfpdfPassbookNo.Value, hdnpdfPaymentMethod.Value, hdnpdfPaymentDetails.Value, hdnpdfProjectId.Value);
         }
         protected void btnReset_Click(object sender, EventArgs e)
         {
@@ -276,11 +282,19 @@ namespace RealEstateCRM
                             con.Open();
                             cmd.ExecuteNonQuery();
                             con.Close();
-                            UpdatePlotData();
+                            hdnpdfReceipt.Value = txtReceiptNo.Text;
+                            hdnpdfPaymentDate.Value = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                            hdnpdfAmount.Value = txtAmount.Text;
+                            hdnpdfPassbookId.Value = ddlPassbook.SelectedValue;
+                            hdnpdfpdfPassbookNo.Value = ddlPassbook.SelectedItem.Text;
+                            hdnpdfPaymentMethod.Value = ddlPaymentMethod.SelectedItem.Text;
+                            hdnpdfPaymentDetails.Value = txtPaymentReference.Text;
+                            hdnpdfProjectId.Value = ddlProjects.SelectedValue;
                             //gc.SendPaymentSMSToCustomer(txtMobile.Text,txtAmount.Text, hdnPlotNo.Value);
-                            //gc.SendPaymentSMSToMD("9985340876", txtAmount.Text, hdnPlotNo.Value);
+                            //gc.SendPaymentSMSToMD("9985340876", txtAmount.Text, hdnPlotNo.Value);                            
+                            UpdatePlotData();
                             BindData();
-                            Reset();
+                            Reset();                            
                         }
                     }
                 }
@@ -292,7 +306,6 @@ namespace RealEstateCRM
                 Response.Redirect("Error.aspx");
             }
         }
-
         private void UpdatePlotData()
         {
             try
@@ -321,6 +334,300 @@ namespace RealEstateCRM
             {
                 err.LogError(ex, ErrorPath);
                 Response.Redirect("Error.aspx");
+            }
+        }
+        private string GetProjectName(string ProjectId)
+        {
+            string ProjectName = "0";
+            string dbConnection = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
+            using (MySqlConnection con = new MySqlConnection(dbConnection))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT ProjectName from Projects Where ProjectId='" + ProjectId + "'"))
+                {
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                ProjectName = reader.GetValue(0).ToString();
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+            }
+            return ProjectName;
+        }
+        private string GetCustomerName(string PassbookId,string ProjectId)
+        {
+            string CustomerName = "0";
+            string dbConnection = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
+            using (MySqlConnection con = new MySqlConnection(dbConnection))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT Name from Passbook Where PassbookId='" + PassbookId + "' and ProjectId='"+ ProjectId + "'"))
+                {
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                CustomerName = reader.GetValue(0).ToString();
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+            }
+            return CustomerName;
+        }
+        public void CreateReceiptPDF(string ReceiptNo,string PaymentDate, string Amount,string PassbookId, string PassbookNo,string PaymentMethod,string PaymentDetails,string ProjectId)
+        {
+            string ProjectName = GetProjectName(ProjectId);
+            string CustomerName = GetCustomerName(PassbookId, ProjectId);
+            using (System.IO.MemoryStream memoryStream = new System.IO.MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 88f, 88f, 10f, 10f);
+                Font NormalFont = FontFactory.GetFont("sans-serif", 12, Font.NORMAL, BaseColor.BLACK);
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+                PdfPTable HeaderTable = null;
+
+                PdfPCell cell = null;
+                BaseColor SkyBlue = WebColors.GetRGBColor("#3c8dbc");
+                BaseColor Grey = WebColors.GetRGBColor("#696969");
+                BaseColor Black = WebColors.GetRGBColor("#444");
+                BaseColor Green = WebColors.GetRGBColor("#0b6623");
+                BaseColor Orange = WebColors.GetRGBColor("#ed872d");
+
+                document.Open();
+                //A4 Page width = 595 height = 892
+                HeaderTable = new PdfPTable(12);
+                HeaderTable.TotalWidth = 590f;
+                HeaderTable.LockedWidth = true;
+
+                cell = new PdfPCell();
+                cell.Colspan = 12;
+                cell.BorderWidth = 0;
+                cell.MinimumHeight = 10f;
+                HeaderTable.AddCell(cell);
+
+                Image logo = Image.GetInstance(Server.MapPath("~/assets/logo.png"));
+                cell = new PdfPCell(logo);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                cell.Colspan = 6;
+                cell.Rowspan = 6;
+                cell.SetLeading(0f, 1.2f);
+                cell.BorderWidth = 0;
+                HeaderTable.AddCell(cell);
+
+                //Image prlogo = Image.GetInstance(Server.MapPath("~/assets/logo.png"));
+                //cell = new PdfPCell(prlogo);
+                //cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                //cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                //cell.Colspan = 6;
+                //cell.Rowspan = 5;
+                //cell.SetLeading(0f, 1.2f);
+                //cell.BorderWidth = 0;
+                //HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 12;
+                cell.BorderWidth = 0;
+                cell.MinimumHeight = 10f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("VAISHNAVI DEVELOPERS", FontFactory.GetFont("sans-serif", 14, Font.BOLD, Black)));
+                cell.BorderWidth = 0;
+                cell.Colspan = 12;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("TRUST - INNOVATION - TRADITION", FontFactory.GetFont("sans-serif", 8, Font.BOLD, Grey)));
+                cell.BorderWidth = 0;
+                cell.Colspan = 12;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("#5-5-789, Plot No.71, 2nd Floor, Agamalah Nagar Colony", FontFactory.GetFont("sans-serif", 8, Font.NORMAL, Grey)));
+                cell.BorderWidth = 0;
+                cell.Colspan = 12;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Chintakunta, Beside KLM Shopping Mall, Mansoorabad,", FontFactory.GetFont("sans-serif", 8, Font.NORMAL, Grey)));
+                cell.BorderWidth = 0;
+                cell.Colspan = 12;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Hyderabad - 500 074.", FontFactory.GetFont("sans-serif", 8, Font.NORMAL, Grey)));
+                cell.BorderWidth = 0;
+                cell.Colspan = 12;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 12;
+                cell.BorderWidth = 0;
+                cell.MinimumHeight = 10f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 12;
+                cell.BorderWidth = 0;
+                cell.SetLeading(0f, 3f);
+                cell.MinimumHeight = 6f;
+
+                cell = new PdfPCell(new Phrase("RECEIPT", FontFactory.GetFont("sans-serif", 18, Font.BOLD, Black)));
+                cell.Colspan = 12;
+                cell.BorderWidth = 0;
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 6;
+                cell.BorderWidth = 0;
+                cell.MinimumHeight = 10f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 6;
+                cell.BorderWidth = 0;
+                cell.SetLeading(0f, 3f);
+                cell.MinimumHeight = 6f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Project : "+ ProjectName, FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Date : " + PaymentDate, FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Receipt No : " + ReceiptNo, FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("PassbookNo : " + PassbookNo, FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Customer Name : "+ CustomerName, FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Amount(INR) : " + Amount, FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Details : " + PaymentMethod + " " + PaymentDetails, FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Towards : Plot Payment", FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 1;
+                cell.Colspan = 6;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 6;
+                cell.BorderWidth = 0;
+                cell.MinimumHeight = 10f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 6;
+                cell.BorderWidth = 0;
+                cell.SetLeading(0f, 3f);
+                cell.MinimumHeight = 6f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 6;
+                cell.BorderWidth = 0;
+                cell.SetLeading(0f, 3f);
+                cell.MinimumHeight = 6f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell();
+                cell.Colspan = 6;
+                cell.BorderWidth = 0;
+                cell.SetLeading(0f, 3f);
+                cell.MinimumHeight = 6f;
+                HeaderTable.AddCell(cell);
+
+
+                cell = new PdfPCell();
+                cell.Colspan = 6;
+                cell.BorderWidth = 0;
+                cell.SetLeading(0f, 3f);
+                cell.MinimumHeight = 6f;
+                HeaderTable.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Authorised Signature", FontFactory.GetFont("sans-serif", 10, Font.NORMAL, BaseColor.BLACK)));
+                cell.BorderWidth = 0;
+                cell.Colspan = 12;
+                cell.PaddingLeft = 8;
+                cell.SetLeading(0f, 1.5f);
+                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                HeaderTable.AddCell(cell);
+
+                document.Add(HeaderTable);
+                document.Close();
+                writer.Close();
+
+                HttpContext.Current.Response.ContentType = "application/pdf";
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment; filename= ReceiptNo_" + ReceiptNo + "_PassbookNo_" + PassbookNo + "_" + ProjectName + ".pdf");
+                HttpContext.Current.Response.OutputStream.Write(memoryStream.GetBuffer(), 0, memoryStream.GetBuffer().Length);
+                //HttpContext.Current.Response.End();
             }
         }
     }

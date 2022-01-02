@@ -84,7 +84,7 @@
                 <div class="form-group row">
                         <div class="col-sm-4 col-12">
                         <label for="validationCustom01">Amount<span class="text-danger">*</span></label>
-                        <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control form-control-primary" placeholder="Amount"></asp:TextBox>
+                        <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control form-control-primary" placeholder="Amount" TextMode="Number"></asp:TextBox>
                     </div>
                     </div>
                 <div class="form-group row">
@@ -95,6 +95,14 @@
                         <asp:HiddenField ID="hdnAmount" runat="server" />
                         <asp:HiddenField ID="hdnPlotNo" runat="server" />
                         <asp:HiddenField ID="hdnPendingAmount" runat="server" />
+                        <asp:HiddenField ID="hdnpdfReceipt" runat="server" />
+                        <asp:HiddenField ID="hdnpdfPaymentDate" runat="server" />
+                        <asp:HiddenField ID="hdnpdfAmount" runat="server" />
+                        <asp:HiddenField ID="hdnpdfpdfPassbookNo" runat="server" />
+                        <asp:HiddenField ID="hdnpdfPassbookId" runat="server" />
+                        <asp:HiddenField ID="hdnpdfPaymentDetails" runat="server" />
+                        <asp:HiddenField ID="hdnpdfPaymentMethod" runat="server" />
+                        <asp:HiddenField ID="hdnpdfProjectId" runat="server" />
                     </div>
                 </div>
             </div>

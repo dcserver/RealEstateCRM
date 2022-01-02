@@ -31,21 +31,8 @@ namespace RealEstateCRM
                         {
                             Session["UserId"] = reader["UserId"].ToString();
                             Session["RoleName"] = reader["RoleName"].ToString();
-                            if (reader["RoleName"].ToString() == "SuperAdmin")
-                            {
-                                Response.Redirect("~/Dashboard.aspx", false);
-                                HttpContext.Current.ApplicationInstance.CompleteRequest();
-                            }
-                            else if (reader["RoleName"].ToString() == "Admin")
-                            {
-                                Response.Redirect("~/AdminDashboard.aspx", false);
-                                HttpContext.Current.ApplicationInstance.CompleteRequest();
-                            }
-                            else if (reader["RoleName"].ToString() == "Accountant")
-                            {
-                                Response.Redirect("~/AccountantDashboard.aspx", false);
-                                HttpContext.Current.ApplicationInstance.CompleteRequest();
-                            }
+                            Response.Redirect("~/Dashboard.aspx", false);
+                            HttpContext.Current.ApplicationInstance.CompleteRequest();
                         }
                     }
                 }

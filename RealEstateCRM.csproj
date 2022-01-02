@@ -43,11 +43,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
@@ -672,6 +675,8 @@
     <Content Include="assets\js\sweetalert.js" />
     <Content Include="assets\js\switchery.min.js" />
     <Content Include="assets\js\toastr.min.js" />
+    <Content Include="assets\logo.jpg" />
+    <Content Include="assets\logo.png" />
     <Content Include="assets\svgs\brands\500px.svg" />
     <Content Include="assets\svgs\brands\accessible-icon.svg" />
     <Content Include="assets\svgs\brands\accusoft.svg" />
@@ -2066,10 +2071,14 @@
     <Content Include="assets\webfonts\fa-brands-400.svg" />
     <Content Include="assets\webfonts\fa-regular-400.svg" />
     <Content Include="assets\webfonts\fa-solid-900.svg" />
+    <Content Include="CancellationDetails.aspx" />
+    <Content Include="CancellationsList.aspx" />
     <Content Include="CommissionEntry.aspx" />
     <Content Include="CommissionPaymentDetails.aspx" />
     <Content Include="CommissionPayments.aspx" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="DownloadPassbook.aspx" />
+    <Content Include="DownloadReceipt.aspx" />
     <Content Include="EDocuments\010414381716sir login.txt" />
     <Content Include="EDocuments\070850546848new.txt" />
     <Content Include="EDocuments\125328357443sir login.txt" />
@@ -2085,10 +2094,26 @@
     <Content Include="PlotPayments.aspx" />
     <Content Include="Plots.aspx" />
     <Content Include="Projects.aspx" />
+    <Content Include="Test.aspx" />
     <Content Include="UploadDoc.aspx" />
+    <Content Include="Users.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CancellationDetails.aspx.cs">
+      <DependentUpon>CancellationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CancellationDetails.aspx.designer.cs">
+      <DependentUpon>CancellationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CancellationsList.aspx.cs">
+      <DependentUpon>CancellationsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CancellationsList.aspx.designer.cs">
+      <DependentUpon>CancellationsList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CommissionEntry.aspx.cs">
       <DependentUpon>CommissionEntry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2116,6 +2141,20 @@
     </Compile>
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadPassbook.aspx.cs">
+      <DependentUpon>DownloadPassbook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DownloadPassbook.aspx.designer.cs">
+      <DependentUpon>DownloadPassbook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadReceipt.aspx.cs">
+      <DependentUpon>DownloadReceipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DownloadReceipt.aspx.designer.cs">
+      <DependentUpon>DownloadReceipt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
@@ -2204,12 +2243,26 @@
     <Compile Include="SuperAdmin.Master.designer.cs">
       <DependentUpon>SuperAdmin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UploadDoc.aspx.cs">
       <DependentUpon>UploadDoc.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UploadDoc.aspx.designer.cs">
       <DependentUpon>UploadDoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

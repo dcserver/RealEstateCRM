@@ -14,7 +14,7 @@
                     <a href="PassbookList.aspx" class="btn btn-round btn-theme"><i class="fa fa-list"></i>&nbsp;PassBook List</a>
                 </div>
                 <div class="col-sm-2 text-right pb-3">
-                    <asp:Button ID="btnDownload" runat="server" Text="Download Passbook" OnClick="btnDownload_Click" CssClass="btn btn-round btn-theme" Visible="false" />
+                    <asp:Button ID="btnDownload" runat="server" Text="Download Passbook" OnClick="btnDownload_Click" CssClass="btn btn-round btn-theme" Visible="true" />
                 </div>
             </div>
             <div class="col-sm-12">

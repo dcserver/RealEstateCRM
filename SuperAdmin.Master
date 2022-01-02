@@ -82,65 +82,8 @@
                         </div>
                         <!--Image Avatar-->
                         <!--Sidebar Navigation Menu-->
-                        <div class="sidebar-menu-container">
-                            <ul class="sidebar-menu mt-4 mb-4">
-                                <li class="parent">
-                                    <a href="Dashboard.aspx"><i class="fa fa-dashboard mr-3"></i>
-                                        <span class="none">Dashboard <i class="pull-right align-bottom"></i></span>
-                                    </a>
-                                </li>
-                                <%--<li class="parent">
-                                    <a href="#" onclick="toggle_menu('employee'); return false" class=""><i class="fa fa-users mr-3"></i>
-                                        <span class="none">Employees <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                                    </a>
-                                    <ul class="children" id="employee">
-                                        <li class="child"><a href="EmployeesList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Employees</a></li>
-                                        <li class="child"><a href="EDocuments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Employee Docs</a></li>
-                                        <li class="child"><a href="DesignationsList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Desgination</a></li>
-                                        <li class="child"><a href="UsersList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Users</a></li>                                        
-                                    </ul>
-                                </li>--%>
-                                <li class="parent">
-                                    <a href="#" onclick="toggle_menu('projects'); return false" class=""><i class="fa fa-tasks mr-3"></i>
-                                        <span class="none">Projects <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                                    </a>
-                                    <ul class="children" id="projects">                                        
-                                        <li class="child"><a href="Projects.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Projects</a></li>
-                                        <li class="child"><a href="Plots.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Plots</a></li>
-                                        <li class="child"><a href="PassbookList.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Passbook</a></li>
-                                        <li class="child"><a href="PDocuments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Documents</a></li>
-                                        <%--<li class="child"><a href="LandRecords.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Land Records</a></li>--%>
-                                        <li class="child"><a href="CommissionEntry.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Commission Entry</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#" onclick="toggle_menu('Payments'); return false" class=""><i class="fa fa-tasks mr-3"></i>
-                                        <span class="none">Payments <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                                    </a>
-                                    <ul class="children" id="Payments">                                        
-                                        <li class="child"><a href="PlotPayments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Plot Payments</a></li>
-                                        <li class="child"><a href="CommissionPayments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Commission Payments</a></li>
-                                        <%--<li class="child"><a href="Payments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Office Expenses</a></li>
-                                        <li class="child"><a href="LandPayments.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Land Payments</a></li>
-                                        <li class="child"><a href="DailySheet.aspx" class="ml-4"><i class="fa fa-angle-right mr-2"></i>Daily Sheet</a></li>--%>
-                                    </ul>
-                                </li>
-                                 <%--<li class="parent">
-                                    <a href="Greetings.aspx"><i class="fa fa-sign-out mr-3"></i>
-                                        <span class="none">Send Sms<i class="pull-right align-bottom"></i></span>
-                                    </a>
-                                </li>
-                                <li class="parent">
-                                    <a href="Duplicates.aspx"><i class="fa fa-sign-out mr-3"></i>
-                                        <span class="none">Duplicates <i class="pull-right align-bottom"></i></span>
-                                    </a>
-                                </li>--%>
-                                <li class="parent">
-                                    <a href="Logout.aspx"><i class="fa fa-sign-out mr-3"></i>
-                                        <span class="none">Logout <i class="pull-right align-bottom"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
+                        <div class="sidebar-menu-container" id="htmlMenu" runat="server">
+                            
                         </div>
                         <!--Sidebar Naigation Menu-->
                     </div>
