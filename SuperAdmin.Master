@@ -77,8 +77,7 @@
                         <!--Image Avatar-->
                         <div class="avatar text-center">
                             <img src="assets/img/client-img4.png" alt="" class="rounded-circle" />
-                            <p><strong>Reddy</strong></p>
-                            <span class="text-primary small"><strong>Admin</strong></span>
+                            <p><strong>Welcome</strong></p>
                         </div>
                         <!--Image Avatar-->
                         <!--Sidebar Navigation Menu-->

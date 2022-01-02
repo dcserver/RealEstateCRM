@@ -72,6 +72,7 @@
                             <asp:ListItem Text="Paytm" Value="Paytm"></asp:ListItem>
                             <asp:ListItem Text="UPI" Value="UPI"></asp:ListItem>
                             <asp:ListItem Text="Cash" Value="Cash"></asp:ListItem>
+                            <asp:ListItem Text="Swipe" Value="Swipe"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-sm-4 col-12">
